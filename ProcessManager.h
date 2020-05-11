@@ -10,7 +10,7 @@
 
 class ProcessManager {
 public:
-    static ProcessFilialIdentification crear_panaderos(int cant_panaderos);
+    static ProcessIdentification crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas);
 };
 
 

@@ -11,12 +11,23 @@
 int main() {
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
     std::cout << "Pid padre: " << getpid() << std::endl;
-    if (ProcessManager::crear_panaderos(PANADEROS) == Padre){
-        std::cout << "Padre after panaderos creation from pid " << getpid() << std::endl;
-        sleep(1);
-    } else {
-//        DebugPrint::print("Hijo after panaderos creation from pid " + std::to_string(getpid()));
-        std::cerr << "Hijo after panaderos creation from pid " << getpid() << std::endl;
+    switch (ProcessManager::crear_procesos(PANADEROS, PIZZEROS, RECEPCIONISTAS)) {
+        case Padre:
+            std::cout << "soy padre" << std::endl;
+            break;
+        case MtroPanadero:
+            std::cout << "soy un panadero" << std::endl;
+            break;
+        case MtroPizzero:
+            std::cout << "soy un pizzero" << std::endl;
+            break;
+        case Recepcionista:
+            std::cout << "soy un recepcionista" << std::endl;
+            break;
+        case EspecialistaMasaMadre:
+            std::cout << "soy el especialista MM" << std::endl;
+            break;
     }
+sleep(1);
     return 0;
 }
