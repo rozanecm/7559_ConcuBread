@@ -1,8 +1,8 @@
 #include <iostream>
 #include <unistd.h>
-#include "ProcessManager.h"
-#include "enums.h"
-#include "DebugPrint.h"
+#include "utils/ProcessManager.h"
+#include "utils/enums.h"
+#include "utils/DebugPrint.h"
 #include "fifos/FifoLectura.h"
 #include "fifos/FifoEscritura.h"
 #include "signals/SIGINT_Handler.h"
@@ -25,12 +25,11 @@ int main() {
     leer_config_file(&cant_panaderos, &cant_pizzeros, &cant_recepcionistas);
 
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
-    std::cout << "Pid padre: " << getpid() << std::endl;
     DebugPrint debug_printer;
+    debug_printer.print("Soy padre con pid " + std::to_string(getpid()));
+
     switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
         case Padre: {
-            debug_printer.print("Sample debug print.");
-            std::cout << "soy padre con pid: " << getpid() << std::endl;
             // event handler para la senial SIGINT (-2)
             SIGINT_Handler sigint_handler;
 
