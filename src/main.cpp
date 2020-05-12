@@ -2,27 +2,15 @@
 #include <unistd.h>
 #include "utils/ProcessManager.h"
 #include "utils/enums.h"
-#include "utils/fifo_consts.h"
 #include "utils/DebugPrint.h"
-#include "fifos/FifoLectura.h"
 #include "fifos/FifoEscritura.h"
-#include "signals/SIGINT_Handler.h"
-#include "signals/SignalHandler.h"
 #include "Actores/Panadero.h"
 #include "Actores/Pizzero.h"
 #include "Actores/Recepcionista.h"
 #include "Actores/EspecialistaMasaMadre.h"
 #include "Padre.h"
-#include <fstream>
-
-//#define PANADEROS 5
-//#define PIZZEROS 1
-//#define RECEPCIONISTAS 1
 
 #define ARCHIVO_CONFIG_PATH "../config.cb"
-
-//#define FIFO_BUFFSIZE 100
-//#define ARCHIVO_FIFO "/tmp/archivo_fifo"
 
 void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepcionistas);
 

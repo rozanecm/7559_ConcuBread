@@ -8,10 +8,10 @@ Fifo::~Fifo() {
 }
 
 void Fifo::cerrar() {
-	close ( fd );
+	close (fd);
 	fd = -1;
 }
 
 void Fifo::eliminar() const {
-	unlink ( nombre.c_str() );
+	unlink (nombre.c_str());
 }
