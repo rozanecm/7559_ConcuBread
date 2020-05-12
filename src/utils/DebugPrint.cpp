@@ -16,5 +16,5 @@ DebugPrint::~DebugPrint(){
 }
 
 void DebugPrint::print(const std::string& msg) {
-    debug_file << msg << std::endl;
+    debug_file << msg << std::flush;
 }

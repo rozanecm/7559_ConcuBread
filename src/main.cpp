@@ -2,11 +2,16 @@
 #include <unistd.h>
 #include "utils/ProcessManager.h"
 #include "utils/enums.h"
+#include "utils/fifo_consts.h"
 #include "utils/DebugPrint.h"
 #include "fifos/FifoLectura.h"
 #include "fifos/FifoEscritura.h"
 #include "signals/SIGINT_Handler.h"
 #include "signals/SignalHandler.h"
+#include "Actores/Panadero.h"
+#include "Actores/Pizzero.h"
+#include "Actores/Recepcionista.h"
+#include "Actores/EspecialistaMasaMadre.h"
 #include <fstream>
 
 //#define PANADEROS 5
@@ -15,8 +20,8 @@
 
 #define ARCHIVO_CONFIG_PATH "../config.cb"
 
-#define BUFFSIZE 100
-#define ARCHIVO_FIFO "/tmp/archivo_fifo"
+//#define FIFO_BUFFSIZE 100
+//#define ARCHIVO_FIFO "/tmp/archivo_fifo"
 
 void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepcionistas);
 
@@ -26,7 +31,7 @@ int main() {
 
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
     DebugPrint debug_printer;
-    debug_printer.print("Soy padre con pid " + std::to_string(getpid()));
+    debug_printer.print("Soy padre con pid " + std::to_string(getpid()) + '\n');
 
     switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
         case Padre: {
@@ -37,7 +42,7 @@ int main() {
             SignalHandler :: getInstance()->registrarHandler ( SIGINT,&sigint_handler );
 
             FifoLectura canal ( ARCHIVO_FIFO );
-            char buffer[BUFFSIZE];
+            char buffer[FIFO_BUFFSIZE];
             canal.abrir();
 
             // mientras no se reciba la senial SIGINT, el proceso realiza su trabajo
@@ -46,10 +51,11 @@ int main() {
             while (sigint_handler.getGracefulQuit() == 0
 //            and bytesLeidos > 0
             ) {
-                bytesLeidos = canal.leer(static_cast<void *>(buffer), BUFFSIZE);
+                bytesLeidos = canal.leer(static_cast<void *>(buffer), FIFO_BUFFSIZE);
                 if (bytesLeidos > 0){
                     std::string mensaje = buffer;
                     mensaje.resize(bytesLeidos);
+                    std::cout << "bytes leidos" << bytesLeidos << std::endl;
                     debug_printer.print(mensaje);
                 }
             }
@@ -61,27 +67,30 @@ int main() {
             break;
         }
         case MtroPanadero: {
-            debug_printer.print("saluda el mtro panadero!");
-            FifoEscritura canal(ARCHIVO_FIFO);
-            std::string mensaje = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.";
-
-            canal.abrir();
-//            sleep(5);
-            canal.escribir(static_cast<const void *>(mensaje.c_str()), mensaje.length());
-            std::cout << "[Escritor] Escribi el mensaje " << mensaje << " en el fifo" << std::endl;
+            Panadero panadero;
+            panadero.mandar_msj_debug("Debug msg from panadero\n");
 
             std::cout << "soy un panadero" << std::endl;
             break;
         }
-        case MtroPizzero:
+        case MtroPizzero: {
+            Pizzero pizzero;
+            pizzero.mandar_msj_debug("Debug msg from pizzero\n");
             std::cout << "soy un pizzero" << std::endl;
             break;
-        case Recepcionista:
+        }
+        case Recepcionista: {
+            class Recepcionista recepcionista;
+            recepcionista.mandar_msj_debug("Debug msg from recepcionista\n");
             std::cout << "soy un recepcionista" << std::endl;
             break;
-        case EspecialistaMasaMadre:
+        }
+        case EspecialistaMasaMadre:{
+            class EspecialistaMasaMadre especialista;
+            especialista.mandar_msj_debug("Debug msg from especialista MM!\n");
             std::cout << "soy el especialista MM" << std::endl;
             break;
+        }
     }
     return 0;
 }
