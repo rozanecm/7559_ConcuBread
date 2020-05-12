@@ -12,6 +12,7 @@
 #include "Actores/Pizzero.h"
 #include "Actores/Recepcionista.h"
 #include "Actores/EspecialistaMasaMadre.h"
+#include "Padre.h"
 #include <fstream>
 
 //#define PANADEROS 5
@@ -35,34 +36,8 @@ int main() {
 
     switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
         case Padre: {
-            // event handler para la senial SIGINT (-2)
-            SIGINT_Handler sigint_handler;
-
-            // se registra el event handler declarado antes
-            SignalHandler :: getInstance()->registrarHandler ( SIGINT,&sigint_handler );
-
-            FifoLectura canal ( ARCHIVO_FIFO );
-            char buffer[FIFO_BUFFSIZE];
-            canal.abrir();
-
-            // mientras no se reciba la senial SIGINT, el proceso realiza su trabajo
-            ssize_t bytesLeidos = 1;
-
-            while (sigint_handler.getGracefulQuit() == 0
-//            and bytesLeidos > 0
-            ) {
-                bytesLeidos = canal.leer(static_cast<void *>(buffer), FIFO_BUFFSIZE);
-                if (bytesLeidos > 0){
-                    std::string mensaje = buffer;
-                    mensaje.resize(bytesLeidos);
-                    std::cout << "bytes leidos" << bytesLeidos << std::endl;
-                    debug_printer.print(mensaje);
-                }
-            }
-            // se recibio la senial SIGINT, el proceso termina
-            SignalHandler :: destruir ();
-
-            canal.cerrar();
+            class Padre padre;
+            padre.atender_hijos(&debug_printer);
             std::cout << "soy padre y estoy saliendo. Salu3!" << std::endl;
             break;
         }
@@ -70,25 +45,21 @@ int main() {
             Panadero panadero;
             panadero.mandar_msj_debug("Debug msg from panadero\n");
 
-            std::cout << "soy un panadero" << std::endl;
             break;
         }
         case MtroPizzero: {
             Pizzero pizzero;
             pizzero.mandar_msj_debug("Debug msg from pizzero\n");
-            std::cout << "soy un pizzero" << std::endl;
             break;
         }
         case Recepcionista: {
             class Recepcionista recepcionista;
             recepcionista.mandar_msj_debug("Debug msg from recepcionista\n");
-            std::cout << "soy un recepcionista" << std::endl;
             break;
         }
         case EspecialistaMasaMadre:{
             class EspecialistaMasaMadre especialista;
             especialista.mandar_msj_debug("Debug msg from especialista MM!\n");
-            std::cout << "soy el especialista MM" << std::endl;
             break;
         }
     }
