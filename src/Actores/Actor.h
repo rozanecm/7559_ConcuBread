@@ -13,7 +13,7 @@ class Actor {
 public:
     Actor();
     ~Actor();
-    void mandar_msj_debug(const std::string& mensaje);
+    void mandar_msj_debug(std::string mensaje);
 
 private:
     FifoEscritura canal = FifoEscritura(ARCHIVO_FIFO);

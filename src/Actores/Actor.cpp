@@ -2,7 +2,6 @@
 // Created by rozanecm on 5/12/20.
 //
 
-#include <iostream>
 #include "Actor.h"
 
 Actor::Actor() {
@@ -13,7 +12,7 @@ Actor::~Actor() {
     canal.cerrar();
 }
 
-void Actor::mandar_msj_debug(const std::string &mensaje) {
-//    std::cout << "por mandar msg de long: " << mensaje.length() << std::endl;
+void Actor::mandar_msj_debug(std::string mensaje) {
+    mensaje += "\n";
     canal.escribir(static_cast<const void *>(mensaje.c_str()), mensaje.length());
 }

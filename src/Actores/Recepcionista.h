@@ -11,6 +11,8 @@ class Recepcionista : public Actor {
 public:
     void pedir_pan();
     void pedir_pizza();
+
+    void hacer_pedidos();
 };
 
 

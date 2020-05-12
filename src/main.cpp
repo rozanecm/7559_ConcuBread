@@ -31,23 +31,24 @@ int main() {
         }
         case MtroPanadero: {
             Panadero panadero;
-            panadero.mandar_msj_debug("Debug msg from panadero\n");
+            panadero.mandar_msj_debug("Debug msg from panadero");
 
             break;
         }
         case MtroPizzero: {
             Pizzero pizzero;
-            pizzero.mandar_msj_debug("Debug msg from pizzero\n");
+            pizzero.mandar_msj_debug("Debug msg from pizzero");
             break;
         }
         case Recepcionista: {
             class Recepcionista recepcionista;
-            recepcionista.mandar_msj_debug("Debug msg from recepcionista\n");
+            recepcionista.hacer_pedidos();
+            recepcionista.mandar_msj_debug( "Recepcionista: He terminado de pedir todos los pedidos.");
             break;
         }
         case EspecialistaMasaMadre:{
             class EspecialistaMasaMadre especialista;
-            especialista.mandar_msj_debug("Debug msg from especialista MM!\n");
+            especialista.mandar_msj_debug("Debug msg from especialista MM!");
             break;
         }
     }
