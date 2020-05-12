@@ -7,10 +7,12 @@
 
 
 #include "enums.h"
+#include "DebugPrint.h"
 
 class ProcessManager {
 public:
-    static ProcessIdentification crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas);
+    static ProcessIdentification
+    crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas, DebugPrint *debug_printer);
 };
 
 

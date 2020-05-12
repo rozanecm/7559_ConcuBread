@@ -7,10 +7,16 @@
 
 
 #include <string>
+#include <fstream>
 
 class DebugPrint {
 public:
-    static void print(const std::string&);
+    DebugPrint();
+    ~DebugPrint();
+    void print(const std::string&);
+
+private:
+    std::ofstream debug_file;
 };
 
 

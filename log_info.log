@@ -1,0 +1,29 @@
+for loop vuelta: 0
+for loop vuelta: 1
+for loop vuelta: 2
+for loop vuelta: 3
+for loop vuelta: 4
+for loop vuelta: 0
+for loop vuelta: 1
+for loop vuelta: 0
+for loop vuelta: 1
+for loop vuelta: 2
+for loop vuelta: 3
+Sample debug print.
+New PIZZERO created with pid 29142
+New RECEPCIONISTA created with pid 29143
+New RECEPCIONISTA created with pid 29144
+New RECEPCIONISTA created with pid 29145
+New RECEPCIONISTA created with pid 29146
+Espec. Masa Madre created with pid 29147
+New PANADERO created with pid 29139
+saluda el mtro panadero!
+New PANADERO created with pid 29140
+saluda el mtro panadero!
+New PIZZERO created with pid 29141
+New PANADERO created with pid 29137
+saluda el mtro panadero!
+New PANADERO created with pid 29136
+saluda el mtro panadero!
+New PANADERO created with pid 29138
+saluda el mtro panadero!

@@ -7,19 +7,29 @@
 #include "fifos/FifoEscritura.h"
 #include "signals/SIGINT_Handler.h"
 #include "signals/SignalHandler.h"
+#include <fstream>
 
-#define PANADEROS 5
-#define PIZZEROS 1
-#define RECEPCIONISTAS 1
+//#define PANADEROS 5
+//#define PIZZEROS 1
+//#define RECEPCIONISTAS 1
+
+#define ARCHIVO_CONFIG_PATH "../config.cb"
 
 #define BUFFSIZE 100
 #define ARCHIVO_FIFO "/tmp/archivo_fifo"
 
+void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepcionistas);
+
 int main() {
+    int cant_panaderos, cant_pizzeros, cant_recepcionistas;
+    leer_config_file(&cant_panaderos, &cant_pizzeros, &cant_recepcionistas);
+
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
     std::cout << "Pid padre: " << getpid() << std::endl;
-    switch (ProcessManager::crear_procesos(PANADEROS, PIZZEROS, RECEPCIONISTAS)) {
+    DebugPrint debug_printer;
+    switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
         case Padre: {
+            debug_printer.print("Sample debug print.");
             std::cout << "soy padre con pid: " << getpid() << std::endl;
             // event handler para la senial SIGINT (-2)
             SIGINT_Handler sigint_handler;
@@ -41,8 +51,7 @@ int main() {
                 if (bytesLeidos > 0){
                     std::string mensaje = buffer;
                     mensaje.resize(bytesLeidos);
-                    std::cout << "cant bytes leidos" << bytesLeidos << std::endl;
-                    std::cout << "[Lector] Lei el dato del fifo: " << mensaje << std::endl;
+                    debug_printer.print(mensaje);
                 }
             }
             // se recibio la senial SIGINT, el proceso termina
@@ -53,6 +62,7 @@ int main() {
             break;
         }
         case MtroPanadero: {
+            debug_printer.print("saluda el mtro panadero!");
             FifoEscritura canal(ARCHIVO_FIFO);
             std::string mensaje = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.";
 
@@ -75,4 +85,29 @@ int main() {
             break;
     }
     return 0;
+}
+
+void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepcionistas) {
+    std::ifstream config_file(ARCHIVO_CONFIG_PATH);
+    if (config_file.is_open()){
+        std::string line;
+        try{
+            std::getline(config_file, line);
+            *cant_panaderos = std::stoi(line);
+
+            std::getline(config_file, line);
+            *cant_pizzeros = std::stoi(line);
+
+            std::getline(config_file, line);
+            *cant_recepcionistas = std::stoi(line);
+        } catch (std::exception const & ex) {
+            std::cout << "Error reading config file. Please check config file format and try again." << std::endl;
+            config_file.close();
+            exit(0);
+        }
+        config_file.close();
+    } else {
+        std::cout << "No config file found! Please, verify the config file is present and try again." << std::endl;
+        exit(0);
+    }
 }
