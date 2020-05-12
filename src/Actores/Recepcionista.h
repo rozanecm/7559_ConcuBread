@@ -9,10 +9,11 @@
 
 class Recepcionista : public Actor {
 public:
+    void hacer_pedidos();
+
+private:
     void pedir_pan();
     void pedir_pizza();
-
-    void hacer_pedidos();
 };
 
 
