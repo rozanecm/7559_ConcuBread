@@ -6,13 +6,15 @@
 #define CONCUBREAD_PROCESSMANAGER_H
 
 
+#include <bits/unique_ptr.h>
 #include "enums.h"
 #include "DebugPrint.h"
+#include "../Procesos/Proceso.h"
 
 class ProcessManager {
 public:
-    static ProcessIdentification
-    crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas, DebugPrint *debug_printer);
+    static std::unique_ptr<Proceso>
+    crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas);
 };
 
 

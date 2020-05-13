@@ -8,8 +8,9 @@
 
 #include "../../fifos/FifoEscritura.h"
 #include "../../utils/fifo_consts.h"
+#include "../Proceso.h"
 
-class Actor {
+class Actor : public Proceso {
 public:
     Actor();
     ~Actor();

@@ -3,3 +3,7 @@
 //
 
 #include "Cocinero.h"
+
+Cocinero::Cocinero(int id_cocinero) : id(id_cocinero){
+
+}

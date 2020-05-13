@@ -9,11 +9,15 @@
 
 class Recepcionista : public Actor {
 public:
-    void hacer_pedidos();
+    explicit Recepcionista(int id);
+    void ejercer_tarea() override;
 
 private:
     void pedir_pan();
     void pedir_pizza();
+    int id;
+
+    void hacer_pedidos();
 };
 
 

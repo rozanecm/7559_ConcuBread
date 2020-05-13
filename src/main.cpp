@@ -1,14 +1,6 @@
 #include <iostream>
-#include <unistd.h>
 #include "utils/ProcessManager.h"
-#include "utils/enums.h"
-#include "utils/DebugPrint.h"
-#include "fifos/FifoEscritura.h"
 #include "Procesos/Actores/Panadero.h"
-#include "Procesos/Actores/Pizzero.h"
-#include "Procesos/Actores/Recepcionista.h"
-#include "Procesos/Actores/EspecialistaMasaMadre.h"
-#include "Procesos/Padre.h"
 
 #define ARCHIVO_CONFIG_PATH "../config.cb"
 
@@ -20,40 +12,11 @@ int main() {
 //    ipc_config(cant_panaderos, cant_pizzeros, cant_recepcionistas);
 
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
-    DebugPrint debug_printer;
-    debug_printer.print("Soy padre con pid " + std::to_string(getpid()) + '\n');
-    ProcessManager process_manager;
-//    process_manager.crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer);
 
-    switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
-        case Padre: {
-            class Padre padre;
-            padre.atender_hijos(&debug_printer);
-            std::cout << "soy padre y estoy saliendo. Salu3!" << std::endl;
-            break;
-        }
-        case MtroPanadero: {
-            Panadero panadero;
-            panadero.mandar_msj_debug("Debug msg from panadero");
-            break;
-        }
-        case MtroPizzero: {
-            Pizzero pizzero;
-            pizzero.mandar_msj_debug("Debug msg from pizzero");
-            break;
-        }
-        case Recepcionista: {
-            class Recepcionista recepcionista;
-            recepcionista.hacer_pedidos();
-            recepcionista.mandar_msj_debug( "Recepcionista: He terminado de pedir todos los pedidos.");
-            break;
-        }
-        case EspecialistaMasaMadre:{
-            class EspecialistaMasaMadre especialista;
-            especialista.mandar_msj_debug("Debug msg from especialista MM!");
-            break;
-        }
-    }
+    const std::unique_ptr<Proceso> &proceso_generado = ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros,
+                                                                                      cant_recepcionistas);
+    proceso_generado->ejercer_tarea();
+
     return 0;
 }
 

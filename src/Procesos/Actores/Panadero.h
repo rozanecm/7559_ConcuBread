@@ -9,7 +9,11 @@
 #include "Cocinero.h"
 
 class Panadero : public Cocinero{
+public:
+    Panadero(int id_panadero);
+    void ejercer_tarea() override;
 
+private:
 };
 
 

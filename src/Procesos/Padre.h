@@ -10,18 +10,22 @@
 #include "../fifos/FifoLectura.h"
 #include "../utils/fifo_consts.h"
 #include "../utils/DebugPrint.h"
+#include "Proceso.h"
 
-class Padre {
+class Padre : public Proceso {
 public:
     Padre();
     ~Padre();
 
-    void atender_hijos(DebugPrint *pPrint);
+    void ejercer_tarea() override;
 
 private:
+    DebugPrint debug_printer;
     SIGINT_Handler sigint_handler;
     FifoLectura canal = FifoLectura(ARCHIVO_FIFO);
     char buffer[FIFO_BUFFSIZE];
+
+    void atender_hijos();
 };
 
 

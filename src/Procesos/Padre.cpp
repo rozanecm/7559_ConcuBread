@@ -16,7 +16,7 @@ Padre::~Padre() {
     SignalHandler :: destruir ();
 }
 
-void Padre::atender_hijos(DebugPrint *debug_printer) {
+void Padre::atender_hijos() {
     ssize_t bytesLeidos = 1;
 
     while (sigint_handler.getGracefulQuit() == 0
@@ -26,7 +26,12 @@ void Padre::atender_hijos(DebugPrint *debug_printer) {
         if (bytesLeidos > 0){
             std::string mensaje = buffer;
             mensaje.resize(bytesLeidos);
-            debug_printer->print(mensaje);
+            debug_printer.print(mensaje);
         }
     }
+}
+
+void Padre::ejercer_tarea() {
+    debug_printer.print("Soy el padre con pid " + std::to_string(getpid()) + '\n');
+    atender_hijos();
 }

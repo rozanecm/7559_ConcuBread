@@ -2,6 +2,7 @@
 // Created by rozanecm on 5/12/20.
 //
 
+#include <iostream>
 #include "Recepcionista.h"
 
 #define CANT_PIZZAS 3
@@ -24,4 +25,13 @@ void Recepcionista::hacer_pedidos() {
         pedir_pan();
         sleep(2);
     }
+}
+
+Recepcionista::Recepcionista(int id) : id(id){
+
+}
+
+void Recepcionista::ejercer_tarea() {
+    std::cout << "Recepc. con nro de serie " << id << " ejerciendo tarea" << std::endl;
+    hacer_pedidos();
 }

@@ -9,6 +9,8 @@
 #include "Actor.h"
 
 class EspecialistaMasaMadre : public Actor{
+public:
+    void ejercer_tarea() override;
 
 };
 
