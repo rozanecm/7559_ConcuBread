@@ -6,8 +6,8 @@
 #define CONCUBREAD_ACTOR_H
 
 
-#include "../fifos/FifoEscritura.h"
-#include "../utils/fifo_consts.h"
+#include "../../fifos/FifoEscritura.h"
+#include "../../utils/fifo_consts.h"
 
 class Actor {
 public:

@@ -3,7 +3,7 @@
 //
 
 #include "Padre.h"
-#include "signals/SignalHandler.h"
+#include "../signals/SignalHandler.h"
 
 Padre::Padre() {
     canal.abrir();

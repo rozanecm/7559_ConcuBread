@@ -4,11 +4,11 @@
 #include "utils/enums.h"
 #include "utils/DebugPrint.h"
 #include "fifos/FifoEscritura.h"
-#include "Actores/Panadero.h"
-#include "Actores/Pizzero.h"
-#include "Actores/Recepcionista.h"
-#include "Actores/EspecialistaMasaMadre.h"
-#include "Padre.h"
+#include "Procesos/Actores/Panadero.h"
+#include "Procesos/Actores/Pizzero.h"
+#include "Procesos/Actores/Recepcionista.h"
+#include "Procesos/Actores/EspecialistaMasaMadre.h"
+#include "Procesos/Padre.h"
 
 #define ARCHIVO_CONFIG_PATH "../config.cb"
 
@@ -17,10 +17,13 @@ void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepci
 int main() {
     int cant_panaderos, cant_pizzeros, cant_recepcionistas;
     leer_config_file(&cant_panaderos, &cant_pizzeros, &cant_recepcionistas);
+//    ipc_config(cant_panaderos, cant_pizzeros, cant_recepcionistas);
 
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
     DebugPrint debug_printer;
     debug_printer.print("Soy padre con pid " + std::to_string(getpid()) + '\n');
+    ProcessManager process_manager;
+//    process_manager.crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer);
 
     switch (ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros, cant_recepcionistas, &debug_printer)) {
         case Padre: {
@@ -32,7 +35,6 @@ int main() {
         case MtroPanadero: {
             Panadero panadero;
             panadero.mandar_msj_debug("Debug msg from panadero");
-
             break;
         }
         case MtroPizzero: {
