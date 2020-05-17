@@ -7,13 +7,12 @@
 
 
 #include "Cocinero.h"
+#include "../../fifos/FifoLectura.h"
 
 class Panadero : public Cocinero{
 public:
-    Panadero(int id_panadero);
-    void ejercer_tarea() override;
-
-private:
+    explicit Panadero(int id_panadero);
+    ~Panadero();
 };
 
 

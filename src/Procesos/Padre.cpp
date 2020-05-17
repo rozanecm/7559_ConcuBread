@@ -6,13 +6,13 @@
 #include "../signals/SignalHandler.h"
 
 Padre::Padre() {
-    canal.abrir();
+    canal_debug.abrir();
 
     SignalHandler :: getInstance()->registrarHandler ( SIGINT,&sigint_handler );
 }
 
 Padre::~Padre() {
-    canal.cerrar();
+    canal_debug.cerrar();
     SignalHandler :: destruir ();
 }
 
@@ -22,7 +22,7 @@ void Padre::atender_hijos() {
     while (sigint_handler.getGracefulQuit() == 0
 //            and bytesLeidos > 0
             ) {
-        bytesLeidos = canal.leer(static_cast<void *>(buffer), FIFO_BUFFSIZE);
+        bytesLeidos = canal_debug.leer(static_cast<void *>(buffer), FIFO_DEBUG_BUFFSIZE);
         if (bytesLeidos > 0){
             std::string mensaje = buffer;
             mensaje.resize(bytesLeidos);

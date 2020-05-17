@@ -10,6 +10,7 @@
 class Recepcionista : public Actor {
 public:
     explicit Recepcionista(int id);
+    ~Recepcionista();
     void ejercer_tarea() override;
 
 private:
@@ -18,6 +19,18 @@ private:
     int id;
 
     void hacer_pedidos();
+    int cantidad_pizzas_encargadas = 0;
+    int cantidad_panes_encargados = 0;
+
+    FifoEscritura canal_panaderos = FifoEscritura(ARCHIVO_FIFO_PANADEROS);
+    FifoEscritura canal_pizzeros = FifoEscritura(ARCHIVO_FIFO_PIZZEROS);
+
+    void hacer_pedido_panaderos();
+    void hacer_pedido_pizzeros();
+
+    std::string id_prox_pizza() const;
+
+    std::string id_prox_pan() const;
 };
 
 

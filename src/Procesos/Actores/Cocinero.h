@@ -6,20 +6,29 @@
 #define CONCUBREAD_COCINERO_H
 
 #include <string>
+#include <memory>
 #include "Actor.h"
+#include "../../fifos/FifoLectura.h"
 
 class Cocinero : public Actor {
 public:
-    explicit Cocinero(int id_cocinero);
-    void recibir_pedido();
+    explicit Cocinero();
+
+    void ejercer_tarea();
+
+    void recibir_pedido(bool *seguir_recibiendo_pedidos);
+
     void realizar_pedido();
+
     void entregar_pedido_a_repartidor();
 
-private:
-    //    FifoEscritura canal = FifoEscritura(ARCHIVO_FIFO);
-    int catidad_de_pedidos_en_cola;
 protected:
-    int id;
+    std::string id;
+    struct flock fl;
+    std::string id_pedido_actual;
+
+    std::unique_ptr<FifoLectura> canal_recepcionista;
+    char buffer[FIFO_PEDIDOS_BUFFSIZE];
 };
 
 #endif //CONCUBREAD_COCINERO_H

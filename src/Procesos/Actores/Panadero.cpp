@@ -5,10 +5,12 @@
 #include <iostream>
 #include "Panadero.h"
 
-Panadero::Panadero(int id_panadero) : Cocinero(id_panadero){
-
+Panadero::Panadero(int id_panadero){
+    this->canal_recepcionista = std::make_unique<FifoLectura>(ARCHIVO_FIFO_PANADEROS);
+    canal_recepcionista->abrir();
+    id = "Panadero " + std::to_string(id_panadero);
 }
 
-void Panadero::ejercer_tarea() {
-    std::cout << "Panadero con nro de serie " << id << " ejerciendo tarea" << std::endl;
+Panadero::~Panadero() {
+    canal_recepcionista->cerrar();
 }

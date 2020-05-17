@@ -16,7 +16,8 @@ int main() {
     const std::unique_ptr<Proceso> &proceso_generado = ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros,
                                                                                       cant_recepcionistas);
     proceso_generado->ejercer_tarea();
-
+//TODO    para esparar a todos los hijos: https://stackoverflow.com/questions/19461744/how-to-make-parent-wait-for-all-child-processes-to-finish
+    std::cout<< "por salir de main" << std::endl;
     return 0;
 }
 

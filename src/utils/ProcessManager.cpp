@@ -16,7 +16,7 @@ std::unique_ptr<Proceso>
     /* Creacion panaderos */
     for (int i = 0; i < cant_panaderos; ++i){
         if (fork() == 0) {
-            return std::make_unique<Panadero>(i);;
+            return std::make_unique<Panadero>(i);
         }
     }
     /* Creacion pizzeros */

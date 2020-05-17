@@ -7,11 +7,12 @@
 
 
 #include "Cocinero.h"
+#include "../../fifos/FifoLectura.h"
 
 class Pizzero : public Cocinero {
 public:
     explicit Pizzero(int id_pizzero);
-    void ejercer_tarea() override;
+    ~Pizzero();
 
 };
 

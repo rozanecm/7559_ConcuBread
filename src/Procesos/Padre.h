@@ -8,7 +8,7 @@
 
 #include "../signals/SIGINT_Handler.h"
 #include "../fifos/FifoLectura.h"
-#include "../utils/fifo_consts.h"
+#include "../utils/consts.h"
 #include "../utils/DebugPrint.h"
 #include "Proceso.h"
 
@@ -21,10 +21,8 @@ public:
 
 private:
     DebugPrint debug_printer;
-    SIGINT_Handler sigint_handler;
-    FifoLectura canal = FifoLectura(ARCHIVO_FIFO);
-    char buffer[FIFO_BUFFSIZE];
-
+    FifoLectura canal_debug = FifoLectura(ARCHIVO_FIFO_DEBUG);
+    char buffer[FIFO_DEBUG_BUFFSIZE];
     void atender_hijos();
 };
 

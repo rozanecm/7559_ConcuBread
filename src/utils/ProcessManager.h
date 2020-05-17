@@ -7,7 +7,6 @@
 
 
 #include <bits/unique_ptr.h>
-#include "enums.h"
 #include "DebugPrint.h"
 #include "../Procesos/Proceso.h"
 

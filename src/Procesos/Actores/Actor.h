@@ -7,17 +7,18 @@
 
 
 #include "../../fifos/FifoEscritura.h"
-#include "../../utils/fifo_consts.h"
+#include "../../utils/consts.h"
 #include "../Proceso.h"
 
 class Actor : public Proceso {
 public:
     Actor();
     ~Actor();
+    void mandar_msj_fifo(std::string mensaje, FifoEscritura *fifo);
     void mandar_msj_debug(std::string mensaje);
 
-private:
-    FifoEscritura canal = FifoEscritura(ARCHIVO_FIFO);
+protected:
+    FifoEscritura canal_debug = FifoEscritura(ARCHIVO_FIFO_DEBUG);
 };
 
 

@@ -6,9 +6,15 @@
 #define CONCUBREAD_PROCESO_H
 
 
+#include "../signals/SIGINT_Handler.h"
+
 class Proceso {
 public:
+    virtual ~Proceso(){};
     virtual void ejercer_tarea() = 0;
+
+protected:
+    SIGINT_Handler sigint_handler;
 };
 
 
