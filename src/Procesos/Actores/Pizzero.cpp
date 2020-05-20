@@ -8,10 +8,19 @@
 Pizzero::Pizzero(int id_pizzero) {
     this->canal_recepcionista = std::make_unique<FifoLectura>(ARCHIVO_FIFO_PIZZEROS);
     canal_recepcionista->abrir();
-    id = "Pizzero " + std::to_string(id_pizzero);
+
+    set_id(id_pizzero);
+
+}
+
+void Pizzero::set_id(int id_pizzero) {
+    id = "Piz";
+    if(id_pizzero < 10){
+        id.append("0");
+    }
+    id.append(std::to_string(id_pizzero));
 }
 
 Pizzero::~Pizzero(){
-    std::cout << "destruyendo pizzero " + id << std::endl << std::flush;
     canal_recepcionista->cerrar();
 }

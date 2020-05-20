@@ -14,13 +14,13 @@ Recepcionista::Recepcionista(int id) : id(id){
 }
 
 Recepcionista::~Recepcionista() {
-    std::cout << "destruyendo recep." << std::endl;
+//    std::cout << "destruyendo recep." << std::endl;
     canal_panaderos.cerrar();
     canal_pizzeros.cerrar();
 }
 
 void Recepcionista::ejercer_tarea() {
-    std::cout << "Recepc. con nro de serie " << id << " ejerciendo tarea" << std::endl;
+//    std::cout << "Recepc. con nro de serie " << id << " ejerciendo tarea" << std::endl;
     hacer_pedidos();
 }
 

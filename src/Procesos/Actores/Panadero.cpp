@@ -8,7 +8,16 @@
 Panadero::Panadero(int id_panadero){
     this->canal_recepcionista = std::make_unique<FifoLectura>(ARCHIVO_FIFO_PANADEROS);
     canal_recepcionista->abrir();
-    id = "Panadero " + std::to_string(id_panadero);
+
+    set_id(id_panadero);
+}
+
+void Panadero::set_id(int id_panadero) {
+    id = "Pan";
+    if(id_panadero < 10){
+        id.append("0");
+    }
+    id.append(std::to_string(id_panadero));
 }
 
 Panadero::~Panadero() {

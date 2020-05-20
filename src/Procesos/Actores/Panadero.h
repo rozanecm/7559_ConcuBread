@@ -13,6 +13,8 @@ class Panadero : public Cocinero{
 public:
     explicit Panadero(int id_panadero);
     ~Panadero();
+
+    void set_id(int id_panadero);
 };
 
 
