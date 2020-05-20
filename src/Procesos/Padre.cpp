@@ -20,6 +20,7 @@ void Padre::atender_hijos() {
     ssize_t bytesLeidos = 1;
 
     while (sigint_handler.getGracefulQuit() == 0
+//    TODO ver esta condicion
 //            and bytesLeidos > 0
             ) {
         bytesLeidos = canal_debug.leer(static_cast<void *>(buffer), FIFO_DEBUG_BUFFSIZE);

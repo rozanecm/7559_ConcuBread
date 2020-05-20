@@ -13,6 +13,7 @@
 class Cocinero : public Actor {
 public:
     explicit Cocinero();
+    ~Cocinero();
 
     void ejercer_tarea();
 
@@ -22,13 +23,23 @@ public:
 
     void entregar_pedido_a_repartidor();
 
+    void pedir_racion_mm();
+
 protected:
     std::string id;
     struct flock fl;
     std::string id_pedido_actual;
 
     std::unique_ptr<FifoLectura> canal_recepcionista;
-    char buffer[FIFO_PEDIDOS_BUFFSIZE];
+    char buffer_recepcionista[FIFO_PEDIDOS_BUFFSIZE];
+
+private:
+    FifoEscritura canal_envio_pedidos_especialista_MM = FifoEscritura(ARCHIVO_FIFO_PEDIDOS_MM);
+
+//    FifoLectura canal_recepcion_mm_especialista_MM = FifoLectura(id);
+//    char buffer_recepcion_mm[LENGTH_MSJ_ENVIO_MM];
+
+    void esperar_envio_mm();
 };
 
 #endif //CONCUBREAD_COCINERO_H

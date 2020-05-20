@@ -5,8 +5,8 @@
 #include <iostream>
 #include "Recepcionista.h"
 
-#define CANT_PIZZAS 3
-#define CANT_PANES 2
+#define CANT_PIZZAS 2
+#define CANT_PANES 1
 
 Recepcionista::Recepcionista(int id) : id(id){
     canal_pizzeros.abrir();
@@ -14,13 +14,11 @@ Recepcionista::Recepcionista(int id) : id(id){
 }
 
 Recepcionista::~Recepcionista() {
-//    std::cout << "destruyendo recep." << std::endl;
-    canal_panaderos.cerrar();
     canal_pizzeros.cerrar();
+    canal_panaderos.cerrar();
 }
 
 void Recepcionista::ejercer_tarea() {
-//    std::cout << "Recepc. con nro de serie " << id << " ejerciendo tarea" << std::endl;
     hacer_pedidos();
 }
 
@@ -36,22 +34,26 @@ void Recepcionista::hacer_pedidos() {
 }
 
 void Recepcionista::pedir_pizza() {
-    mandar_msj_debug("Recepc. Encargando pizza");
+//    TODO refactor meter el cpo del metodo que llamo aca directamente
     hacer_pedido_pizzeros();
 }
 
 void Recepcionista::pedir_pan() {
-    mandar_msj_debug("Recepc. Encargando pan");
+//    TODO sacar pasamanos.
     hacer_pedido_panaderos();
 }
 
 void Recepcionista::hacer_pedido_pizzeros() {
-    mandar_msj_fifo(id_prox_pizza(), &canal_pizzeros);
+    auto id_pizza = id_prox_pizza();
+    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pizza " + id_pizza);
+    mandar_msj_fifo(id_pizza, &canal_pizzeros);
     cantidad_pizzas_encargadas++;
 }
 
 void Recepcionista::hacer_pedido_panaderos() {
-    mandar_msj_fifo(id_prox_pan(), &canal_panaderos);
+    auto id_pan = id_prox_pan();
+    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pan " + id_pan);
+    mandar_msj_fifo(id_pan, &canal_panaderos);
     cantidad_panes_encargados++;
 }
 
