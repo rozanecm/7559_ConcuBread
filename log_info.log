@@ -1,27 +1,53 @@
-Soy el padre con pid 31623
+Soy el padre con pid 18004
+Recepc. 1 Encargando pizza Piz0100
 Recepc. 0 Encargando pizza Piz0000
+Piz01. Recibi pedido: Piz0100
+Piz01 pidiendo racion de masa madre...
+Especialista: recibi pedido de racion de MM de parte de: Piz01
+Piz01 recibi racion de masa madre! Continuemos con el pedido...
+Piz01 realizando pedido Piz0100
 Piz00. Recibi pedido: Piz0000
 Piz00 pidiendo racion de masa madre...
+Especialista: recibi pedido de racion de MM de parte de: Piz00
 Piz00 recibi racion de masa madre! Continuemos con el pedido...
-Especialista: recibi pedido de racion de MM: Piz00
 Piz00 realizando pedido Piz0000
+Recepc. 1 Encargando pizza Piz0101
 Recepc. 0 Encargando pizza Piz0001
+Piz01 termine de realizar el pedido Piz0100
+Piz01 entregando pedido Piz0100 a repartidor.
+Piz01. Recibi pedido: Piz0101
+Piz01 pidiendo racion de masa madre...
+Especialista: recibi pedido de racion de MM de parte de: Piz01
+Piz01 recibi racion de masa madre! Continuemos con el pedido...
+Piz01 realizando pedido Piz0101
 Piz00 termine de realizar el pedido Piz0000
 Piz00 entregando pedido Piz0000 a repartidor.
 Piz00. Recibi pedido: Piz0001
 Piz00 pidiendo racion de masa madre...
+Especialista: recibi pedido de racion de MM de parte de: Piz00
 Piz00 recibi racion de masa madre! Continuemos con el pedido...
 Piz00 realizando pedido Piz0001
-Especialista: recibi pedido de racion de MM: Piz00
 Recepc. 0 Encargando pan Pan0000
+Recepc. 1 Encargando pan Pan0100
+Pan01. Recibi pedido: Pan0100
 Pan00. Recibi pedido: Pan0000
+Pan01 pidiendo racion de masa madre...
 Pan00 pidiendo racion de masa madre...
+Especialista: recibi pedido de racion de MM de parte de: Pan01
+Especialista: recibi pedido de racion de MM de parte de: Pan00
+Pan01 recibi racion de masa madre! Continuemos con el pedido...
+Pan01 realizando pedido Pan0100
 Pan00 recibi racion de masa madre! Continuemos con el pedido...
-Especialista: recibi pedido de racion de MM: Pan00
 Pan00 realizando pedido Pan0000
+Piz01 termine de realizar el pedido Piz0101
+Piz01 entregando pedido Piz0101 a repartidor.
+Piz01 termino con todos sus deberes.
 Piz00 termine de realizar el pedido Piz0001
 Piz00 entregando pedido Piz0001 a repartidor.
 Piz00 termino con todos sus deberes.
+Pan01 termine de realizar el pedido Pan0100
+Pan01 entregando pedido Pan0100 a repartidor.
+Pan01 termino con todos sus deberes.
 Pan00 termine de realizar el pedido Pan0000
 Pan00 entregando pedido Pan0000 a repartidor.
 Pan00 termino con todos sus deberes.

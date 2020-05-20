@@ -12,12 +12,11 @@ Cocinero::Cocinero() {
     this->fl.l_len = 0;
 
     canal_envio_pedidos_especialista_MM.abrir();
-//    canal_recepcion_mm_especialista_MM.abrir();
 }
 
 Cocinero::~Cocinero() {
     canal_envio_pedidos_especialista_MM.cerrar();
-//    canal_recepcion_mm_especialista_MM.cerrar();
+    canal_recepcion_de_mm->cerrar();
 }
 
 void Cocinero::ejercer_tarea() {
@@ -46,6 +45,7 @@ void Cocinero::recibir_pedido(bool *seguir_recibiendo_pedidos) {
         *seguir_recibiendo_pedidos = false;
     } else {
         this->id_pedido_actual = buffer_recepcionista;
+//        TODO resize string
         mandar_msj_debug(id + ". Recibi pedido: " + this->id_pedido_actual);
     }
 }
@@ -65,9 +65,29 @@ void Cocinero::pedir_racion_mm() {
 
 void Cocinero::esperar_envio_mm() {
 //    TODO esperar envio
-    mandar_msj_debug(id + " recibi racion de masa madre! Continuemos con el pedido...");
+    abrir_canal_recepcion_de_mm();
+    std::string mensaje;
+    canal_recepcion_de_mm->leer(static_cast<void *>(buffer_recepcion_mm), LENGTH_MSJ_ENVIO_MM);
+    mensaje = buffer_recepcion_mm;
+    mensaje.resize(LENGTH_MSJ_ENVIO_MM);
+    if(mensaje == MENSAJE_PARA_ENVIAR_MM_A_COCINEROS){
+        mandar_msj_debug(id + " recibi racion de masa madre! Continuemos con el pedido...");
+    } else{
+        mandar_msj_debug("ALERTA! " + id + " Por alguna razon no recibi racion masa madre y puedo seguir igual...");
+        std::cout << "msj recibido en lugar de mm: " << mensaje << std::endl;
+        mandar_msj_debug("msj recibido en lu    gar de mm: " + std::to_string(int(buffer_recepcion_mm[1])));
+    }
 }
 
 void Cocinero::entregar_pedido_a_repartidor() {
     mandar_msj_debug(id + " entregando pedido " + id_pedido_actual + " a repartidor.");
+}
+
+void Cocinero::abrir_canal_recepcion_de_mm() {
+    if(not canal_recepcion_de_mm_fue_abierto){
+        std::cout << "Cocinero abriendo canal " << id << " para recibir mm en cocinero " << std::endl;
+        canal_recepcion_de_mm = std::make_unique<FifoLectura>(id);
+        canal_recepcion_de_mm->abrir();
+        canal_recepcion_de_mm_fue_abierto = true;
+    }
 }

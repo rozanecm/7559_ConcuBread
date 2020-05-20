@@ -36,10 +36,14 @@ protected:
 private:
     FifoEscritura canal_envio_pedidos_especialista_MM = FifoEscritura(ARCHIVO_FIFO_PEDIDOS_MM);
 
-//    FifoLectura canal_recepcion_mm_especialista_MM = FifoLectura(id);
-//    char buffer_recepcion_mm[LENGTH_MSJ_ENVIO_MM];
+    std::unique_ptr<FifoLectura> canal_recepcion_de_mm;
+    char buffer_recepcion_mm[LENGTH_MSJ_ENVIO_MM];
 
     void esperar_envio_mm();
+
+    void abrir_canal_recepcion_de_mm();
+
+    bool canal_recepcion_de_mm_fue_abierto = false;
 };
 
 #endif //CONCUBREAD_COCINERO_H

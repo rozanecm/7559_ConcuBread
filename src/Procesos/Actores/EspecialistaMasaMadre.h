@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <map>
 #include <vector>
+#include <memory>
 #include "Actor.h"
 #include "../../fifos/FifoLectura.h"
 
@@ -24,12 +25,15 @@ private:
 
     std::string escuchar_pedidos(bool *seguir_recibiendo_pedidos);
 
-    void entregar_pedido(const std::string& string);
+    void entregar_pedido(const std::string& id_solicitante);
 
-    void check_existencia_canal(const std::string &basicString);
+    bool existe_canal_envio_mm(const std::string &id_pedido);
 
     void cerrar_canales_particulares();
 
+    FifoEscritura * obtener_canal_envio_mm(const std::string &id_solicitante);
+
+    std::vector<std::pair<std::string, FifoEscritura*>> canales_envio_mm;
 };
 
 
