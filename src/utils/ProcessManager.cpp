@@ -3,11 +3,12 @@
 //
 
 #include "ProcessManager.h"
-#include "../Procesos/Padre.h"
+#include "../Procesos/DebugPrinter.h"
 #include "../Procesos/Actores/Panadero.h"
 #include "../Procesos/Actores/Pizzero.h"
 #include "../Procesos/Actores/Recepcionista.h"
 #include "../Procesos/Actores/EspecialistaMasaMadre.h"
+#include "../Procesos/Padre.h"
 #include <unistd.h>
 #include <bits/unique_ptr.h>
 
@@ -34,6 +35,10 @@ std::unique_ptr<Proceso>
     /* Creacion espec. masa madre */
     if (fork() == 0) {
         return std::make_unique<EspecialistaMasaMadre>();
+    }
+    /* Creacion Debug Printer */
+    if (fork() == 0) {
+        return std::make_unique<DebugPrinter>();
     }
     return std::make_unique<Padre>();
 }

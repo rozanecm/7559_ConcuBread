@@ -64,7 +64,6 @@ void Cocinero::pedir_racion_mm() {
 }
 
 void Cocinero::esperar_envio_mm() {
-//    TODO esperar envio
     abrir_canal_recepcion_de_mm();
     std::string mensaje;
     canal_recepcion_de_mm->leer(static_cast<void *>(buffer_recepcion_mm), LENGTH_MSJ_ENVIO_MM);
@@ -85,7 +84,6 @@ void Cocinero::entregar_pedido_a_repartidor() {
 
 void Cocinero::abrir_canal_recepcion_de_mm() {
     if(not canal_recepcion_de_mm_fue_abierto){
-        std::cout << "Cocinero abriendo canal " << id << " para recibir mm en cocinero " << std::endl;
         canal_recepcion_de_mm = std::make_unique<FifoLectura>(id);
         canal_recepcion_de_mm->abrir();
         canal_recepcion_de_mm_fue_abierto = true;

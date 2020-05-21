@@ -1,6 +1,6 @@
 #include <iostream>
+#include <fstream>
 #include "utils/ProcessManager.h"
-#include "Procesos/Actores/Panadero.h"
 
 #define ARCHIVO_CONFIG_PATH "../config.cb"
 
@@ -9,15 +9,12 @@ void leer_config_file(int *cant_panaderos, int *cant_pizzeros, int *cant_recepci
 int main() {
     int cant_panaderos, cant_pizzeros, cant_recepcionistas;
     leer_config_file(&cant_panaderos, &cant_pizzeros, &cant_recepcionistas);
-//    ipc_config(cant_panaderos, cant_pizzeros, cant_recepcionistas);
 
     std::cout << "Bienvenido a ConcuBread!" << std::endl;
 
     const std::unique_ptr<Proceso> &proceso_generado = ProcessManager::crear_procesos(cant_panaderos, cant_pizzeros,
                                                                                       cant_recepcionistas);
     proceso_generado->ejercer_tarea();
-//TODO    para esparar a todos los hijos: https://stackoverflow.com/questions/19461744/how-to-make-parent-wait-for-all-child-processes-to-finish
-    std::cout<< "por salir de main" << std::endl;
     return 0;
 }
 

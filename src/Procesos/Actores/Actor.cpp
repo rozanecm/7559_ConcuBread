@@ -5,6 +5,7 @@
 #include "Actor.h"
 
 #include <utility>
+#include <iostream>
 
 Actor::Actor() {
     canal_debug.abrir();
