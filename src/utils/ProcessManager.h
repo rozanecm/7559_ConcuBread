@@ -12,7 +12,7 @@
 class ProcessManager {
 public:
     static std::unique_ptr<Proceso>
-    crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas);
+    crear_procesos(int cant_panaderos, int cant_pizzeros, int cant_recepcionistas, bool print_debug_msgs);
 };
 
 
