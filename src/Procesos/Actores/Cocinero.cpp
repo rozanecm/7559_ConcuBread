@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <random>
 #include "Cocinero.h"
 
 Cocinero::Cocinero() {
@@ -51,10 +52,15 @@ void Cocinero::recibir_pedido(bool *seguir_recibiendo_pedidos) {
 }
 
 void Cocinero::realizar_pedido() {
+    /* Inicializacion random */
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 6);
+
     pedir_racion_mm();
     esperar_envio_mm();
     mandar_msj_debug(id + " realizando pedido " + id_pedido_actual);
-    sleep(3);
+    sleep(dis(gen));
     mandar_msj_debug(id + " termine de realizar el pedido " + id_pedido_actual);
 }
 

@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <random>
 #include "Recepcionista.h"
 
 #define CANT_PIZZAS 2
@@ -23,13 +24,17 @@ void Recepcionista::ejercer_tarea() {
 }
 
 void Recepcionista::hacer_pedidos() {
-    for (int i = 0; i < CANT_PIZZAS; ++i){
+    /* La parte random esta sacada de https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution */
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 6);
+    for (int i = 0; i < dis(gen); ++i){
         pedir_pizza();
-        sleep(2);
+        sleep(dis(gen));
     }
-    for (int i = 0; i < CANT_PANES; ++i){
+    for (int i = 0; i < dis(gen); ++i){
         pedir_pan();
-        sleep(2);
+        sleep(dis(gen));
     }
 }
 
