@@ -12,6 +12,7 @@ EspecialistaMasaMadre::EspecialistaMasaMadre() {
 
 EspecialistaMasaMadre::~EspecialistaMasaMadre() {
     canal_cocineros.cerrar();
+    canal_cocineros.eliminar();
     cerrar_canales_particulares();
 }
 
@@ -71,6 +72,8 @@ FifoEscritura * EspecialistaMasaMadre::obtener_canal_envio_mm(const std::string 
 void EspecialistaMasaMadre::cerrar_canales_particulares() {
     for(auto & it : canales_envio_mm){
         it.second->cerrar();
+        it.second->eliminar();
+        delete it.second;
     }
     canales_envio_mm.clear();
 }

@@ -17,6 +17,8 @@ Recepcionista::Recepcionista(int id) : id(id){
 Recepcionista::~Recepcionista() {
     canal_pizzeros.cerrar();
     canal_panaderos.cerrar();
+    canal_pizzeros.eliminar();
+    canal_panaderos.eliminar();
 }
 
 void Recepcionista::ejercer_tarea() {

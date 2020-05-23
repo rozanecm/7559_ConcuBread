@@ -16,6 +16,7 @@ DebugPrinter::DebugPrinter(bool should_i_print) : should_i_print(should_i_print)
 
 DebugPrinter::~DebugPrinter() {
     canal_debug.cerrar();
+    canal_debug.eliminar();
     debug_file.close();
     SignalHandler :: destruir ();
 }

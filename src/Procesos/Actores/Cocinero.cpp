@@ -18,6 +18,7 @@ Cocinero::Cocinero() {
 Cocinero::~Cocinero() {
     canal_envio_pedidos_especialista_MM.cerrar();
     canal_recepcion_de_mm->cerrar();
+    /* eliminacion en void EspecialistaMasaMadre::cerrar_canales_particulares(); */
 }
 
 void Cocinero::ejercer_tarea() {
