@@ -30,36 +30,54 @@ void Recepcionista::hacer_pedidos() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 6);
-    for (int i = 0; i < dis(gen); ++i){
-        pedir_pizza();
-        sleep(dis(gen));
-    }
-    for (int i = 0; i < dis(gen); ++i){
-        pedir_pan();
-        sleep(dis(gen));
+
+    auto cant_pizzas_a_encargar = dis(gen);
+    auto cant_panes_a_encargar = dis(gen);
+
+    auto decision_pizza_o_pan = dis(gen);
+
+    int pizzas_encargadas = 0;
+    int panes_encargados = 0;
+    while(pizzas_encargadas < cant_pizzas_a_encargar or panes_encargados < cant_panes_a_encargar){
+        if(decision_pizza_o_pan % 2 == 0 and pizzas_encargadas < cant_pizzas_a_encargar){
+            pizzas_encargadas++;
+            pedir_pizza(pizzas_encargadas, cant_pizzas_a_encargar);
+            sleep(dis(gen));
+        } else if(panes_encargados < cant_panes_a_encargar) {
+            panes_encargados++;
+            pedir_pan(panes_encargados, cant_panes_a_encargar);
+            sleep(dis(gen));
+        }
+        decision_pizza_o_pan = dis(gen);
     }
 }
 
-void Recepcionista::pedir_pizza() {
+void Recepcionista::pedir_pizza(int numero_de_encargo_pizza, int cant_total_de_pizzas_a_hacer) {
 //    TODO refactor meter el cpo del metodo que llamo aca directamente
-    hacer_pedido_pizzeros();
+    hacer_pedido_pizzeros(numero_de_encargo_pizza, cant_total_de_pizzas_a_hacer);
 }
 
-void Recepcionista::pedir_pan() {
+void Recepcionista::pedir_pan(int numero_de_encargo_pan, int cant_total_de_panes_a_hacer) {
 //    TODO sacar pasamanos.
-    hacer_pedido_panaderos();
+    hacer_pedido_panaderos(numero_de_encargo_pan, cant_total_de_panes_a_hacer);
 }
 
-void Recepcionista::hacer_pedido_pizzeros() {
+void Recepcionista::hacer_pedido_pizzeros(int numero_de_encargo_pizza, int cant_total_de_pizzas_a_hacer) {
     auto id_pizza = id_prox_pizza();
-    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pizza " + id_pizza);
+    
+    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pizza " + id_pizza + " (" +
+    std::to_string(numero_de_encargo_pizza) + "/" + std::to_string(cant_total_de_pizzas_a_hacer) + ")");
+
     mandar_msj_fifo(id_pizza, &canal_pizzeros);
     cantidad_pizzas_encargadas++;
 }
 
-void Recepcionista::hacer_pedido_panaderos() {
+void Recepcionista::hacer_pedido_panaderos(int numero_de_encargo_pan, int cant_total_de_panes_a_hacer) {
     auto id_pan = id_prox_pan();
-    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pan " + id_pan);
+
+    mandar_msj_debug("Recepc. " + std::to_string(id) + " Encargando pan " + id_pan + " (" +
+    std::to_string(numero_de_encargo_pan) + "/" + std::to_string(cant_total_de_panes_a_hacer) + ")");
+
     mandar_msj_fifo(id_pan, &canal_panaderos);
     cantidad_panes_encargados++;
 }
