@@ -16,7 +16,8 @@ Actor::~Actor() {
 }
 
 void Actor::mandar_msj_fifo(std::string mensaje, FifoEscritura *fifo) {
-    fifo->escribir(static_cast<const void *>(mensaje.c_str()), mensaje.length());
+    fifo->escribir(static_cast<const void *>(mensaje.c_str()),
+                   mensaje.length());
 }
 
 void Actor::mandar_msj_debug(std::string mensaje) {

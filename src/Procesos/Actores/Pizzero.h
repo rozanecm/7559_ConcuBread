@@ -12,6 +12,7 @@
 class Pizzero : public Cocinero {
 public:
     explicit Pizzero(int id_pizzero);
+
     ~Pizzero();
 
     void set_id(int id_pizzero);

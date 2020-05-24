@@ -10,7 +10,8 @@
 
 class Proceso {
 public:
-    virtual ~Proceso(){};
+    virtual ~Proceso() {};
+
     virtual void ejercer_tarea() = 0;
 
 protected:

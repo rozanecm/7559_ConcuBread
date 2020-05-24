@@ -9,10 +9,12 @@
 
 /* el id que se manda con el pedido tiene siempre esta longitud */
 #define FIFO_PEDIDOS_BUFFSIZE 7
-/* el msj que le mandan es el id, que tiene 5 chars siempre (Piz/Pan + id de dos digitos) */
+/* el msj que le mandan es el id, que tiene 5 chars siempre
+ * (Piz/Pan + id de dos digitos) */
 #define FIFO_ESPECIALISTA_MM_BUFFSIZE 5
 
-/* Se definen las siguientes ctes. para entender mas facilmente los valores en el codigo */
+/* Se definen las siguientes ctes. para entender mas facilmente los
+ * valores en el codigo */
 #define MENSAJE_PARA_ENVIAR_MM_A_COCINEROS "X"
 #define LENGTH_MSJ_ENVIO_MM 1
 

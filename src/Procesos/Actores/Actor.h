@@ -13,8 +13,11 @@
 class Actor : public Proceso {
 public:
     Actor();
+
     ~Actor();
+
     void mandar_msj_fifo(std::string mensaje, FifoEscritura *fifo);
+
     void mandar_msj_debug(std::string mensaje);
 
 protected:

@@ -13,6 +13,7 @@
 class Cocinero : public Actor {
 public:
     explicit Cocinero();
+
     ~Cocinero();
 
     void ejercer_tarea();
@@ -34,7 +35,8 @@ protected:
     char buffer_recepcionista[FIFO_PEDIDOS_BUFFSIZE];
 
 private:
-    FifoEscritura canal_envio_pedidos_especialista_MM = FifoEscritura(ARCHIVO_FIFO_PEDIDOS_MM);
+    FifoEscritura canal_envio_pedidos_especialista_MM =
+            FifoEscritura(ARCHIVO_FIFO_PEDIDOS_MM);
 
     std::unique_ptr<FifoLectura> canal_recepcion_de_mm;
     char buffer_recepcion_mm[LENGTH_MSJ_ENVIO_MM];

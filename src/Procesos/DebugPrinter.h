@@ -15,6 +15,7 @@
 class DebugPrinter : public Proceso {
 public:
     DebugPrinter(bool should_i_print);
+
     ~DebugPrinter();
 
     void ejercer_tarea() override;
@@ -23,9 +24,10 @@ private:
     bool should_i_print;
     FifoLectura canal_debug = FifoLectura(ARCHIVO_FIFO_DEBUG);
     char buffer[FIFO_DEBUG_BUFFSIZE];
+
     void atender_debug_msgs();
 
-    void print(const std::string&);
+    void print(const std::string &);
 
     std::ofstream debug_file;
 };
