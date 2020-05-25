@@ -18,7 +18,7 @@ EspecialistaMasaMadre::~EspecialistaMasaMadre() {
 
 void EspecialistaMasaMadre::ejercer_tarea() {
     bool seguir_recibiendo_pedidos = true;
-    while (seguir_recibiendo_pedidos) {
+    while (sigint_handler.getGracefulQuit() == 0 and seguir_recibiendo_pedidos) {
         std::string id_solicitante = escuchar_pedidos(
                 &seguir_recibiendo_pedidos);
         if (seguir_recibiendo_pedidos) {

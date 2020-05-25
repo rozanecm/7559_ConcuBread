@@ -40,10 +40,11 @@ void Recepcionista::hacer_pedidos() {
 
     int pizzas_encargadas = 0;
     int panes_encargados = 0;
-    while (pizzas_encargadas < cant_pizzas_a_encargar or panes_encargados <
-                                                         cant_panes_a_encargar){
-        if (decision_pizza_o_pan % 2 == 0 and pizzas_encargadas <
-                                              cant_pizzas_a_encargar) {
+    while (sigint_handler.getGracefulQuit() == 0 and
+           (pizzas_encargadas < cant_pizzas_a_encargar or
+            panes_encargados < cant_panes_a_encargar)) {
+        if (decision_pizza_o_pan % 2 == 0 and
+            pizzas_encargadas < cant_pizzas_a_encargar) {
             pizzas_encargadas++;
             pedir_pizza(pizzas_encargadas, cant_pizzas_a_encargar);
             sleep(dis(gen));
