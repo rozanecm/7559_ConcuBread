@@ -7,4 +7,4 @@ El mismo deberá presentar tres líneas, con un número cada una, indicando resp
 - cantidad de recepcionistas
 
 # Material
-[Aquí](res/ej. casos de uso.pdf) se encuentra un template de caso de uso provisto por el profesor.
+[Aquí](<res/ej. casos de uso.pdf>) se encuentra un template de caso de uso provisto por el profesor.
