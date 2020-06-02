@@ -11,4 +11,4 @@ El mismo deberá presentar tres líneas, con un número cada una, indicando resp
  # Informes
  El informe se encuentra [aquí](informe.pdf).
  
- La presentación se encuentra [aquí]("ConcuBread_ presentacion.pdf").
+ La presentación se encuentra [aquí](<ConcuBread_ presentacion.pdf>).
