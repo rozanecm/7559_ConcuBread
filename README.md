@@ -8,3 +8,7 @@ El mismo deberá presentar tres líneas, con un número cada una, indicando resp
 
 # Material
 [Aquí](<res/ej. casos de uso.pdf>) se encuentra un template de caso de uso provisto por el profesor.
+ # Informes
+ El informe se encuentra [aquí](informe.pdf).
+ 
+ La presentación se encuentra [aquí](ConcuBread_ presentacion.pdf).
